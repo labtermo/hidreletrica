@@ -2,17 +2,30 @@
 
 
 O laboratório de sistemas hidrelétricos foi criado em 2010 a partir de um projeto de pesquisa e desenvolvimento financiado pelo CNPq. 
-Este projeto chamada "Inovatrans" teve como objetivo avaliar e modelar uma turbina denominada Indalma inventada por um empreendedor na Amazônia e para fazer isso foi desenvolvido uma bancada para fazer os ensaios dessa turbina.
+Este projeto chamada "Inovatrans" teve como objetivo avaliar e modelar uma turbina denominada Indalma inventada por um empreendedor na Amazônia e para fazer isso foi desenvolvido uma bancada para fazer o levantamento das características dessa turbina.
 
-![](fotos/foto_bancada_turbinas.jpg)
 
-A bancada conta com uma turbina Indalma e uma turbina Kaplan.
+Entretanto, buscou-se desenhar a bancada levando em conta a necessidade de um labortaório didático para o curso de engenharia de energia. A proposta era de projetar um laboratório o mais realista possível de uma situação real, em contraposição a tendência de práticas laboratóriais baseados em kits didáticos especialmente desenvolvidos para trabalhar alguns conceitos específicos do conteúdo ministrado em sala de aula.
 
-A bancada é composta por circuito hidráulico com reservatório de 1000 litros, bomba de 25CV, tubulação de 8’, 6’ e 4’ com queda de até 7 metros, turbina hidráulica sobre teste, canal de saída com vertedouro triangular. A vazão da bomba pode ser controlada por meio de um inversor de frequência , permitindo assim um controle mais preciso da pressão da coluna d'água no circuito de adução da turbina vazão. A turbina está acoplada a um freio de Prony e a um gerador elétrico, permitindo a colocar carga mecânica ou elétrica.
+O uso desses kits didáticos específicos tendem a simplificar a complexidade de um sistema de geração e conversão de energia, pois tem a preocupação de ensinar o princípio de funcionamento, mas deixa o tão necessário contato com sistemas reais em segundo plano. 
 
+Essa tendência de simplificação dos laboratórios e um certo afastamento dos sistemas mais reais e complexos nas práticas laboratoriais não é recente e caracteriza uma limitação na formação do engenheiro, que não adquire conhecimento para trabalhar em situações reais que envolvem problemas e desafios constantes. 
+Isto é, o estudante perde a possibilidade de entender o processo de conversão de energia no seu conjunto, sendo que poderia experimentar ou aplicar o conteúdo de diversas disciplinas com a mesma instalação laboratorial mais próxima de realidade, analisando e tratando problemas de engenharia com vários níveis de profundidade
+
+Pois, sabe-se que um sistema de conversão de energia em escala reduzida pode ter a mesma complexidade operacional de um sistema real e requer uma infraestrutura apropriada para seu correto funcionamento. 
+
+Por isso o laboratório de sistemas hidrelétricos foi construído com componentes industriais reais disponíveis no mercado com uma configuração mais próximo possível de uma instalação real. 
+
+O laboratório é composto por uma bancada de ensaios de turbinas hidraulicas com circuito hidráulico com reservatório de 1000 litros, bomba de 25CV, tubulação de 8’, 6’ e 4’ com queda de até 7 metros, turbina hidráulica sobre teste, canal de saída com vertedouro triangular. 
+
+A vazão da bomba pode ser controlada por meio de um inversor de frequência, permitindo assim um controle mais preciso da pressão da coluna d'água no circuito de adução da turbina vazão. A turbina está acoplada a um freio de Prony e a um gerador elétrico, permitindo a colocar carga mecânica ou elétrica.
+
+![Figura 1](fotos/foto_bancada_turbinas.jpg)
+
+A foto da instalação do laboratório mostra a bancada de ensaios (a) e a turbina Indalma (b) e turbina Kaplan (b) que podem ser montados na instalação.
  
 # 1. PROPOSTA METODOLÓGICA
-A bancada conta com vários elementos que compõem uma central hidrelétrica em escala reduzida, visto que cada elemento tem uma função com um nível de complexidade diferente, a proposta é trabalhar em diferentes níveis de acordo com a disciplina.
+O laboratório de sistemas hidrelétricos conta com vários elementos que compõem uma central hidrelétrica em escala reduzida. Visto que cada elemento tem uma função com um nível de complexidade diferente, a proposta é trabalhar em diferentes níveis de acordo com a disciplina que utilize o laboratório.
 
 ## 1.1. Primeiro nível: operação manual demonstrativa com instrumentação analógica elementar.
 Experiências direcionadas às disciplinas do segundo, terceiro e quarto semestre podendo trabalhar conceitos de fonte de energia, fenômenos de transporte. Este nível inclui a utilização de vertedouro triangular para o cálculo da vazão, cálculo da perda de carga na tubulação e medição de pressão.
