@@ -44,6 +44,7 @@ Neste nível de complexidade o foco das experiências é na conversão eletr
 Experiências direcionadas à disciplina de instrumentação e controle de sistemas dinâmicos do sétimo, oitavo e nono semestre de engenharia. A bancada permite o estudo da turbina hidráulica como um sistema de geração que permite que alunos desenvolvam experiências de controle de processo e instrumentação na referida bancada.
 Além da modelagem matemática de toda a estrutura do reservatório, conduto forçado e a própria turbina, o sistema elétrico também pode ser modelado e estudado. Serão desenvolvidos dois modelos do conjunto, circuito hidráulico e turbina. Um modelo linear em torno de um ponto de operação do sistema e um modelo não linear. O modelo linear representa o desempenho da turbina a pequenas variações de sinal, onde o aluno poderá reconhecer esses sinais.
 
+[1] Els RH van, SILVA JM da, Araújo BBM, Santander OLS. Laboratório real de geração hidrelétrcia - Proposta de metodológica de utlização de bancada de ensaio de turbina hidráulica no curso de engenharia de energia. XLI Congr. Bras. Educ. em Eng. - COBENGE 2013, Gramada - RS: 2013.
 
 # 2. Instalação 
 
@@ -155,6 +156,10 @@ Freio de prony.
 ## 8.2. Reguação da geração por meio de controle potência por meio de carga de lastro 
 
 # Bibliografia
+
+[1] Els RH van, SILVA JM da, Araújo BBM, Santander OLS. Laboratório real de geração hidrelétrcia - Proposta de metodológica de utlização de bancada de ensaio de turbina hidráulica no curso de engenharia de energia. XLI Congr. Bras. Educ. em Eng. - COBENGE 2013, Gramada - RS: 2013.
+
+[1] Santander OLS, Silva JM da, ELS RH van. Desenvolvimento de bancada de ensaios de turbina hidráulica. XI Congr. Iberoam. Eng. Mecânica, Argentina: 2013.
 
 [1] Santander OLS. Montagem e instrumentação de uma bancada para turbina hidráulica. Dissertação em sistema mecatrônicos - Universidade de Brasília, 2014.
 
