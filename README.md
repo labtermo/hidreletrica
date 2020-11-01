@@ -136,35 +136,34 @@ O diagrama de blocos a seguir mostra o detalhamento dessa configuração.
 
 A interface de medição e monitoramento de variáveis elétricos está sendo desenvolvido. 
 
-As placas para aquirir as variáveis hidraulicas e mecânicas serão apresentado na proxima secção.
+As placas para aquirir as variáveis hidraulicas e mecânicas serão apresentado na proxima secção. As duas placas de aquisição são idêntiticas. 
 
 
 ## 4.1. Placa de aquisição de dados
 
-A placa de aquisição de dados foi desenvolvido num trabalho de final de curso de um aluno de engenharia eletrônico e está baseado num hardware Arduino bastante popular. 
+A placa de aquisição de dados foi desenvolvido num trabalho de final de curso de um aluno de engenharia eletrônico e tem como componente principal um microcontrolador Arduino bastante popular. 
 
-[1] Calixto R de O. Sistema Supervisório para Bancada de Ensaio de Picoturbina Hidráulica Indalma. Trabalho de conclusão de curso de Engenharia eletrônica - Universidade de Brasília, 2015.
-
-O diagrama de blocos na figura a seguir, apresenta os blocos funcionais do hardware. Cada placa conta com os seguintes interfaces:
+O diagrama de blocos é apresentado na figura a seguir, mostrando os blocos funcionais do hardware. Cada placa conta com os seguintes interfaces:
 
 
 | item | descrição | Interface | Função | pino pcb placa |           
 |:----:|:--------:|:---------:|:------:|:----:|
-| 1 | Sensor de entrada analógica  | 0 - 10 v | ler sinal célula de carga | |    
-| 2 | Sensor de entrada analógica  | 0 - 10 v | ler sinal célula de carga | |
-| 3 | Entrada de pulsos            | coletor aberto | ler frequencia |   |    
-| 4 | Entrada de pulsos            | coletor aberto | ler frequencia |  2   |   
-| 5 | Sensor de loop de corrente   |  4-20mA  |  ler vazão    |  3   |
-| 6 | Sensor de loop de corrente   |  4-20mA  |    | 19   | 
+| 1 | Sensor de entrada analógica | 0 - 10 v | ler sinal célula de carga | |
+| 2 | Sensor de entrada analógica | 0 - 10 v | ler sinal célula de carga | |
+| 3 | Entrada de pulsos           | coletor aberto | ler frequencia |   |    
+| 4 | Entrada de pulsos           | coletor aberto | ler frequencia | 2 |   
+| 5 | Sensor de loop de corrente  |  4-20mA  |  ler vazão    |  3   |
+| 6 | Sensor de loop de corrente  |  4-20mA  |  ler pressão  | 19   | 
+| 7 | Sáida para display LCD      | TTL      | mostrar os dados | |
+| 8 | Interface de comunicação    | RS485 & WiFi |comunicação como o supervisório |
+| 9 | Interface serial digital    | TTL      | conversor ADC |
 
 
-
+O diagrama de blocos da placa de aquisição é mostrada na figura a seguir.
 
 ![](figuras/diagrama_placa_aquisicao.jpg)
 
-A bancada conta com dois placas de aquisição idênticos 
-
-
+O esquema da placa é mostrada nas figuras a seguir.
 
 ![](figuras/esquematico_placa_aquisicao_p1.pdf)
 ![](figuras/esquematico_placa_aquisicao_P2.pdf)
@@ -172,9 +171,9 @@ A bancada conta com dois placas de aquisição idênticos
 ![](figuras/esquematico_placa_aquisicao_P4.pdf)
 ![](figuras/esquematico_placa_aquisicao_p5.pdf)
 
-
-
 ![](figuras/pcb_placa_aquisicao.pdf)
+
+As únicas configurações de hardware na placa é feito pela selação de canal de comunicação (RS485 e WiFi) usando estrapes nos jumpers no J1. 
 
 
 ## 4.2. ScadaBR 
@@ -187,20 +186,24 @@ Diagrama PID
 
 ![](figuras/rede_comunicacao.jpg)
 
+Rede MODBUS
 
-
-
+* MODBUS-IP
+* MODBUS-RTU
 
 
 ## 4.4. Controle do pressão da bomba
 
 ![](figuras/diagrama_blocos_controle_pressao.jpg)
 
-[1] Santos MECM dos. Controle da pressão de operação da Bancada de Testes para Turbinas Hidráulicas. Universidade de Brasília, 2015.
 
+Santos MECM dos. Controle da pressão de operação da Bancada de Testes para Turbinas Hidráulicas. Trabalho de conclusão de curso de Engenharia de Energia - Universidade de Brasília, 2015.
 
 # 5. Ensaios do segundo nível metodológico - Carga Mecânica
 Freio de prony.
+
+
+## 5.1. Roteiro da experiência remota
 
 
 
