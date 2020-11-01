@@ -163,15 +163,18 @@ O diagrama de blocos da placa de aquisição é mostrada na figura a seguir.
 
 ![](figuras/diagrama_placa_aquisicao.jpg)
 
-O esquema da placa é mostrada nas figuras a seguir.
+O esquema da placa é mostrada nas figuras a seguir. Na primeira figura tem o detalhamento do microcontrolador com as entradas e saídas.
 
-![](figuras/esquematico_placa_aquisicao_p1.pdf)
-![](figuras/esquematico_placa_aquisicao_P2.pdf)
-![](figuras/esquematico_placa_aquisicao_p3.pdf)
-![](figuras/esquematico_placa_aquisicao_P4.pdf)
-![](figuras/esquematico_placa_aquisicao_p5.pdf)
 
-![](figuras/pcb_placa_aquisicao.pdf)
+![](figuras/esquematico_placa_aquisicao_micro.jpg)
+
+A seguir tem o circuito de comunicação com a opção de selecionar entre RS485 ou WiFi.
+
+![](figuras/esquematico_placa_aquisicao_comm.jpg)
+
+A placa de circuito impresso é apresentada na figura a seguir. 
+
+![](figuras/pcb_placa_aquisicao.jpg)
 
 As únicas configurações de hardware na placa é feito pela selação de canal de comunicação (RS485 e WiFi) usando estrapes nos jumpers no J1. 
 
