@@ -97,6 +97,7 @@ sensor_rotacao![](fotos/sensor_rotacao.jpg)
 
 # 4. Sistema de aquisição de dados
 
+
 ![](figuras/diagrama_blocos_instrumentacao.jpg)
 
 # 4.1. Rede de comunicação
@@ -106,9 +107,40 @@ sensor_rotacao![](fotos/sensor_rotacao.jpg)
 
 # 4.2. Placa de aquisição de dados
 
+A placa de aquisição de dados foi desenvolvido num trabalho de final de curso de um aluno de engenharia eletrônico e está baseado num hardware Arduino bastante popular. 
+
+[1] Calixto R de O. Sistema Supervisório para Bancada de Ensaio de Picoturbina Hidráulica Indalma. Trabalho de conclusão de curso de Engenharia eletrônica - Universidade de Brasília, 2015.
+
+O diagrama de blocos na figura a seguir, apresenta os blocos funcionais do hardware. Cada placa conta com os seguintes interfaces:
+
+
+| item | descrição | Interface | Função | pino pcb placa |           
+|:----:|:--------:|:---------:|:------:|:----:|
+| 1 | Sensor de entrada analógica  | 0 - 10 v | ler sinal célula de carga | |    
+| 2 | Sensor de entrada analógica  | 0 - 10 v | ler sinal célula de carga | |
+| 3 | Entrada de pulsos            | coletor aberto | ler frequencia |   |    
+| 4 | Entrada de pulsos            | coletor aberto | ler frequencia |  2   |   
+| 5 | Sensor de loop de corrente   |  4-20mA  |  ler vazão    |  3   |
+| 6 | Sensor de loop de corrente   |  4-20mA  |    | 19   | 
+
+
+
+
 ![](figuras/diagrama_placa_aquisicao.jpg)
 
+A bancada conta com dois placas de aquisição idênticos 
 
+
+
+![](figuras/esquematico_placa_aquisicao_p1.pdf)
+![](figuras/esquematico_placa_aquisicao_P2.pdf)
+![](figuras/esquematico_placa_aquisicao_p3.pdf)
+![](figuras/esquematico_placa_aquisicao_P4.pdf)
+![](figuras/esquematico_placa_aquisicao_p5.pdf)
+
+
+
+![](figuras/pcb_placa_aquisicao.pdf)
 
 # 5. Scada 
 
