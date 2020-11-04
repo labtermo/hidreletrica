@@ -199,6 +199,19 @@ A novidade neste programa é que, diferentemente das soluções convenconais que
  
 O programa está no [repositório](https://github.com/rudivels/Bancada_Hidreletrica) 
 
+### 4.1.2. Operação da placa de aquisição de dados
+
+As principais operações na placa de aquisição são:
+
+* ler o estado da rede WiFi
+* ler o endereço IP da placa
+* reiniciar a rede WiFi
+
+Para fazer isso o programa conta com três teclas do tipo push button e o LCD gráfico de 128x64. 
+Durante a operação normal o LCD mostra as variáveis monitorados pela placa e o estado da comunicação. Ao resetar a placa e segurar uma das tecla de programação a placa entre no modo de configuração que permite essas principais operações. 
+Pretende-se melhorar essa interface para incluir mais funcionalidades.
+
+
 ## 4.2. ScadaBR 
 
 Diagrama PID 
