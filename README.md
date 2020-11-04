@@ -178,6 +178,26 @@ A placa de circuito impresso é apresentada na figura a seguir.
 
 As únicas configurações de hardware na placa é feito pela selação de canal de comunicação (RS485 e WiFi) usando estrapes nos jumpers no J1. 
 
+### 4.1.1. Configuração da placa de aquisição de dados
+A placa de aquisição de dados foi inicialmente desenvolvido com uma interface de comunicação RS485 para rodar o protocolo MODBUS-RTU.
+Essa opção esbarrou em algumas limitações, pois o MODBUS-RTU com o software ScadaBR não permitia a expansão do sistema devido a uma limitação de implementar várias linhas seriais RS485 no servidor.
+
+Com a amadurecimento da plataforma de instrumentação desenvolveu-se uma nova placa de aquisição, que alem do MODBUS-RTU também podia implementado o protocolo MODBUR-IP e fazer uso da rede de comunicação WiFi no laboratório.
+
+Para implementar as funcionalidades na placa de aquisição com o Arduino Nano usou-se a [biblioteca ESP8266.h](https://github.com/itead/ITEADLIB_Arduino_WeeESP8266)
+
+Para implementar o protocolo MODBUS-IP usou se a biblioteca de [André Sarmento disponível neste link](https://github.com/andresarmento/modbus-arduino)
+
+Alguns problemas que tivemos que resolver para o correto funcionamento do hardware e software. 
+Tivemos que corriger alguns bugs da placa, retirando o CD4050, e colocar no lugar dele um divisor de tensão para ligar o TX do Arduio Nano com o RX do ESP8266.
+Usamos a configuração mais simples possível de ligar o ESP8266, por meio somente de comandos AT e ligando somente o pino CHE_PD em Vcc, TX e RX do Arduino com RX e TX do ESP8266. 
+Outro problema encontrado foi na alimentação VCC do ESP8266 pela saída de 3.3v do Arduino. O consumo do ESP8266 derrubava a saída de 3.3v. 
+Por isso teve que se colocar uma fonte de 3.3 exclusivo para alimentar o ESP8266.
+
+Feito isso, desenvolveu-se um programa de habilitar o WiFi no Arduino, e um programa de configuração usando as teclas da placa e o display LCD para configurar o WiFi. 
+A novidade neste programa é que, diferentemente das soluções convenconais que usam o Arduino com duas portas seriais, usou-se neste caso somente as teclas e o display para fazer a configuração.
+ 
+O programa está no [repositório](https://github.com/rudivels/Bancada_Hidreletrica) 
 
 ## 4.2. ScadaBR 
 
