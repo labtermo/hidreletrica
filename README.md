@@ -199,6 +199,8 @@ A novidade neste programa é que, diferentemente das soluções convenconais que
  
 O programa está no [repositório](https://github.com/rudivels/Bancada_Hidreletrica) 
 
+O esquemático completo da placa de aquisição está [neste link](Schematic_Rudi_2020-11-05_23-20-54.pdf)
+
 ### 4.1.2. Operação da placa de aquisição de dados
 
 As principais operações na placa de aquisição são:
