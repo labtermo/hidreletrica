@@ -270,7 +270,7 @@ Freio de prony.
 
 [1] Alves KD. Desenvolvimento de regulador de velocidade para Turbina Indalma com sintonia PID baseado em Otimização por Enxame de Partículas ( PSO ). Universidade de Brasília, 2018.
 
-## 7.2. Reguação da geração por meio de controle potência por meio de carga de lastro 
+## 7.2. Regulação da geração por meio de controle potência por meio de carga de lastro 
 
 # 8. Bibliografia
 
