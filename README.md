@@ -100,6 +100,10 @@ Calixto, Rodrigo de O. Sistema Supervisório para Bancada de Ensaio de Picoturbi
 
 ![](fotos/sensor_pressao.jpg)
 
+![](fotos/especificacao_medidor_vazao.jpg)
+
+![](fotos/certificado_calibracao_med_vazao.jpg)
+
 ## 3.2. Vazão volumétrica
 
 
@@ -112,6 +116,12 @@ sensor_rotacao![](fotos/sensor_rotacao.jpg)
 ## 3.4. Freio de Prony com célula de carga
 
 
+![](fotos/especificacao_celula_carga.jpg)
+
+![](fotos/foto_celula_carga.jpg)
+
+
+[Video de freio de prony funcionando na bancada](https://youtu.be/LnSO-6u0-hE)
 
 
 # 4. Sistema de supervisão, controle e  aquisição de dados do laboratório
