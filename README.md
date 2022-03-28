@@ -100,28 +100,55 @@ Calixto, Rodrigo de O. Sistema Supervisório para Bancada de Ensaio de Picoturbi
 
 ![](fotos/sensor_pressao.jpg)
 
-![](fotos/especificacao_medidor_vazao.jpg)
 
-![](fotos/certificado_calibracao_med_vazao.jpg)
 
 ## 3.2. Vazão volumétrica
 
 
 ![](fotos/foto_med_vazao.jpg)
 
+![](fotos/especificacao_medidor_vazao.jpg)
+
+![](fotos/certificado_calibracao_med_vazao.jpg)
+
 ## 3.3. Sensor de rotação
 
-sensor_rotacao![](fotos/sensor_rotacao.jpg)
+O sensor de rotacao é baseado num sensor de proximidade indutivo conforem mostrado na figura a seguir.
+
+![](fotos/sensor_rotacao.jpg)
+
+O sensor de proximidade é do tipo NPN coletor aberto com os seguintes pinos mostrados na fotos a seguir. 
+
+![](fotos/pinagem_proximidade.jpg)
+
+| fio | descrição |  Borne cor da emenda|           
+|:----:|:--------:|:---------:|:------:|
+| BN - Brown | Alimentação 6-30Vdc | Vermelho| 
+| BK - Black | sinal célula | Preto |
+| BU - Blue  | GND | Amarelo |
+
+A conversão dos pulsos em velocidade poder ser feito de várias maneiras. 
+A maneira mais direto é pelo mostrador WIKA A-RD-1 cuja manual é mostrado a seguir. 
+
+[![](annexos/wika_ba_a_rd_1_6350.pdf)](annexos/wika_ba_a_rd_1_6350.pdf)
+
+Este mostrador tem vários funcionalidades e pode ser reprogramados para fazer outras funções.
+
 
 ## 3.4. Freio de Prony com célula de carga
 
+Para medir a potência mecânica no eixo desenvolvido pela turbina pode ser usar o Freio de Prony.
 
-![](fotos/especificacao_celula_carga.jpg)
+O elemento principal do freio é a célula de carga, mostrada na figura a seguir.
 
 ![](fotos/foto_celula_carga.jpg)
 
+Folha de especificação técnica da célula de carga.
 
-[Video de freio de prony funcionando na bancada](https://youtu.be/LnSO-6u0-hE)
+![](fotos/especificacao_celula_carga.jpg)
+
+
+[Video de freio de prony montada na bancada](https://youtu.be/LnSO-6u0-hE)
 
 
 # 4. Sistema de supervisão, controle e  aquisição de dados do laboratório
@@ -130,18 +157,35 @@ O sistema de supervisão, controle e  aquisição de dados do laboratório (Supe
 
 Os principais elementos são:
 
-1. Computador supervisório
-2. Placa de aquisição de dados das variáveis hidraulicas e mecânicas 
-3. Controle e monitoração da bomba hidraulica
-4. Rede local de comunicação
-5. Interface de medição e monitoração de variáveis elétricas
+* Computador supervisório
+* Placa de aquisição de dados das variáveis hidraulicas e mecânicas 
+* Controle e monitoração da bomba hidraulica
+* Rede local de comunicação
+* Interface de medição e monitoração de variáveis elétricas
 
 Escolheu-se como plataforma de integrar todos estes elementos o software ScadaBR. 
-A figura a seguir mostra a primeira configuração do sistema com computador supervisório (13) as placas de aquisição das variáveis hidraulicas (2) e mecânicas (3) e o controle da bomba hidraulica (1). 
+A figura a seguir mostra a primeira configuração do sistema com os seguintes componentes:
+
+1. inversor CFW9 para controle da moto-bomba hidraulica
+2. placa de aquisição das variáveis hidraulicas 
+3. placa de aquisição das variáveis mecânicas 
+4. moto bomba 
+5. tubulação de 6"
+6. turbulação de 4"
+7. turbina Indalma 
+8. ambor de freio 
+9. célula de carga
+10. sensor de vazão
+11. interface RS232 para o inversor CFW9
+12. interface RS485 para o supervisório 
+13. computador supervisório 
+14. rede rs485 ligando as placas de aquisição
+
 
 ![](figuras/disposicao_medidores.jpg)
 
 O diagrama de blocos a seguir mostra o detalhamento dessa configuração.
+
 ![](figuras/diagrama_blocos_instrumentacao.jpg)
 
 A interface de medição e monitoramento de variáveis elétricos está sendo desenvolvido. 
