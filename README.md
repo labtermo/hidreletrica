@@ -337,15 +337,15 @@ Gonçalves JS, Noleto LG, Els RH van. CARACTERIZAÇÃO GEOMÉTRICA E SIMULAÇÃO
 
 ## 8.2. Trabalho de conclusão de curso
 
-Sloot N, Donald R Mac. Experimental and Numerical Study of the Performance Characteristics of a Pico Hydro Turbine Manufactured By Indalma Industries Inc. Report Bachelor of Science in Mechanical Engineering - Anton de Kom University of Suriname, 2014.
+[Sloot N, Donald R Mac. Experimental and Numerical Study of the Performance Characteristics of a Pico Hydro Turbine Manufactured By Indalma Industries Inc. Report Bachelor of Science in Mechanical Engineering - Anton de Kom University of Suriname, 2014.](annexos/thesis_Ramsay_Nigel_Final_2014_05_reduzed.pdf)
 
-Oliveira D dos S. Avaliação Experimental em Modelo Reduzido da Turbina Hidráulica Indalma. Trabalho de conclusão de curso de Engenharia de Energia - Universidade de Brasília, 2014.
+[Oliveira D dos S. Avaliação Experimental em Modelo Reduzido da Turbina Hidráulica Indalma. Trabalho de conclusão de curso de Engenharia de Energia - Universidade de Brasília, 2014.](annexos/Danilo_TCC2.pdf)
 
-Calixto R de O. Sistema Supervisório para Bancada de Ensaio de Picoturbina Hidráulica Indalma. Trabalho de conclusão de curso de Engenharia eletrônica - Universidade de Brasília, 2015.
+[Calixto R de O. Sistema Supervisório para Bancada de Ensaio de Picoturbina Hidráulica Indalma. Trabalho de conclusão de curso de Engenharia eletrônica - Universidade de Brasília, 2015.](annexos/TCC2_Rodrigo_de_Oliveira_Calixto_090013476.pdf)
 
 Tavares ITB. Influência De Difusor Na Eficiência De Uma Turbina Hidráulica. Trabalho de conclusão de curso em engenharia de energia - Universidade de Brasília, 2014.
 
-Santos MECM dos. Controle da pressão de operação da Bancada de Testes para Turbinas Hidráulicas. Trabalho de conclusão de curso de Engenharia de Energia - Universidade de Brasília, 2015.
+[Santos MECM dos. Controle da pressão de operação da Bancada de Testes para Turbinas Hidráulicas. Trabalho de conclusão de curso de Engenharia de Energia - Universidade de Brasília, 2015.](annexos/Maria_Eugenia_TCC2_completo.pdf)
 
 Rocha GB. BANCADA DIDÁTICA PARA TURBINA KAPLAN : PROJETO , CONSTRUÇÃO E ESTUDO EXPERIMENTAL. Trabalho de conclusão de curso de Engenharia de Energia - Universidade de Brasília, 2015.
 
