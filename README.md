@@ -128,11 +128,7 @@ O sensor de proximidade é do tipo NPN coletor aberto com os seguintes pinos mos
 | BU - Blue  | GND | Amarelo |
 
 A conversão dos pulsos em velocidade poder ser feito de várias maneiras. 
-A maneira mais direto é pelo mostrador WIKA A-RD-1 cuja manual é mostrado a seguir. 
 
-[![](annexos/wika_ba_a_rd_1_6350.pdf)](annexos/wika_ba_a_rd_1_6350.pdf)
-
-Este mostrador tem vários funcionalidades e pode ser reprogramados para fazer outras funções.
 
 
 ## 3.4. Freio de Prony com célula de carga
@@ -149,6 +145,7 @@ Folha de especificação técnica da célula de carga.
 
 
 [Video de freio de prony montada na bancada](https://youtu.be/LnSO-6u0-hE)
+
 
 
 # 4. Sistema de supervisão, controle e  aquisição de dados do laboratório
@@ -176,15 +173,16 @@ A figura a seguir mostra a primeira configuração do sistema com os seguintes c
 8. ambor de freio 
 9. célula de carga
 10. sensor de vazão
-11. interface RS232 para o inversor CFW9
+11. interface RS485 para o inversor CFW9
 12. interface RS485 para o supervisório 
 13. computador supervisório 
-14. rede rs485 ligando as placas de aquisição
+14. wifi para ligar placa de aquisição de sinal
 
 
 ![](figuras/disposicao_medidores.jpg)
 
 O diagrama de blocos a seguir mostra o detalhamento dessa configuração.
+
 
 ![](figuras/diagrama_blocos_instrumentacao.jpg)
 
@@ -193,11 +191,38 @@ A interface de medição e monitoramento de variáveis elétricos está sendo de
 As placas para aquirir as variáveis hidraulicas e mecânicas serão apresentado na proxima secção. As duas placas de aquisição são idêntiticas. 
 
 
-## 4.1. Placa de aquisição de dados
+## 4.1. Placa de aquisição de dados com ESP32
 
-A placa de aquisição de dados foi desenvolvido num trabalho de final de curso de um aluno de engenharia eletrônico e tem como componente principal um microcontrolador Arduino bastante popular. 
+O desenvolvimento da placa de aquisição - terceira versão. A primeira versão foi do CW552 da Controlware. O segunda versão foi desenvolvido trabalho de TCC Rodrigo Calixto baseado no Arduino.
+Terceira versão desenvolvido em ESP32.
 
-O diagrama de blocos é apresentado na figura a seguir, mostrando os blocos funcionais do hardware. Cada placa conta com os seguintes interfaces:
+Requisitos:
+
+* Concentrar todas os sensores e transdutores
+* Ligação com computador wireless 
+* Protocolo Modbus-IP a uma taxa de amostragem de 1Hz
+* Capacidade de medir dados a 10Hz de amostragem e encaminhar a porta serial dedicado a 115kBPS
+* display LCD mostrando todos os dados
+* configuração de IP dinâmico e estático 
+* Alimentação 5, 12 e 24Volts DC
+
+
+![](figuras/esquema_esp32wifi.jpg)
+
+| conector | descrição |  sinal|           
+|:----:|:--------:|:---------:|
+| Jx | Sensor rotação da turbina  | pulsos em 12V  |  
+| Jx | Amplificador célula carga 1 | 0-10V  |
+| Jx | Amplificador célula carga 2 | 0-10V  |
+| Jx | abertura de borboleta | 0-3.3V
+| Jx | vazão | 4-20mA |
+
+
+
+
+![](figuras/Dinamometro_ESP32_wifi_modbus_freio_turbina_2025.jpg)
+
+
 
 
 | item | descrição | Interface | Função | pino pcb placa |           
@@ -213,62 +238,15 @@ O diagrama de blocos é apresentado na figura a seguir, mostrando os blocos func
 | 9 | Interface serial digital    | TTL      | conversor ADC |
 
 
-O diagrama de blocos da placa de aquisição é mostrada na figura a seguir.
-
-![](figuras/diagrama_placa_aquisicao.jpg)
-
-O esquema da placa é mostrada nas figuras a seguir. Na primeira figura tem o detalhamento do microcontrolador com as entradas e saídas.
 
 
-![](figuras/esquematico_placa_aquisicao_micro.jpg)
-
-A seguir tem o circuito de comunicação com a opção de selecionar entre RS485 ou WiFi.
-
-![](figuras/esquematico_placa_aquisicao_comm.jpg)
-
-A placa de circuito impresso é apresentada na figura a seguir. 
-
-![](figuras/pcb_placa_aquisicao.jpg)
-
-As únicas configurações de hardware na placa é feito pela selação de canal de comunicação (RS485 e WiFi) usando estrapes nos jumpers no J1. 
-
-### 4.1.1. Configuração da placa de aquisição de dados
-A placa de aquisição de dados foi inicialmente desenvolvido com uma interface de comunicação RS485 para rodar o protocolo MODBUS-RTU.
-Essa opção esbarrou em algumas limitações, pois o MODBUS-RTU com o software ScadaBR não permitia a expansão do sistema devido a uma limitação de implementar várias linhas seriais RS485 no servidor.
-
-Com a amadurecimento da plataforma de instrumentação desenvolveu-se uma nova placa de aquisição, que alem do MODBUS-RTU também podia implementado o protocolo MODBUR-IP e fazer uso da rede de comunicação WiFi no laboratório.
-
-Para implementar as funcionalidades na placa de aquisição com o Arduino Nano usou-se a [biblioteca ESP8266.h](https://github.com/itead/ITEADLIB_Arduino_WeeESP8266)
-
-Para implementar o protocolo MODBUS-IP usou se a biblioteca de [André Sarmento disponível neste link](https://github.com/andresarmento/modbus-arduino)
-
-Alguns problemas que tivemos que resolver para o correto funcionamento do hardware e software. 
-Tivemos que corriger alguns bugs da placa, retirando o CD4050, e colocar no lugar dele um divisor de tensão para ligar o TX do Arduio Nano com o RX do ESP8266.
-Usamos a configuração mais simples possível de ligar o ESP8266, por meio somente de comandos AT e ligando somente o pino CHE_PD em Vcc, TX e RX do Arduino com RX e TX do ESP8266. 
-Outro problema encontrado foi na alimentação VCC do ESP8266 pela saída de 3.3v do Arduino. O consumo do ESP8266 derrubava a saída de 3.3v. 
-Por isso teve que se colocar uma fonte de 3.3 exclusivo para alimentar o ESP8266.
-
-Feito isso, desenvolveu-se um programa de habilitar o WiFi no Arduino, e um programa de configuração usando as teclas da placa e o display LCD para configurar o WiFi. 
-A novidade neste programa é que, diferentemente das soluções convenconais que usam o Arduino com duas portas seriais, usou-se neste caso somente as teclas e o display para fazer a configuração.
- 
-O programa está no [repositório](https://github.com/rudivels/Bancada_Hidreletrica) 
-
-O esquemático completo da placa de aquisição está [neste link](figuras/Schematic_Rudi_2020-11-05_23-20-54.pdf)
-
-### 4.1.2. Operação da placa de aquisição de dados
-
-As principais operações na placa de aquisição são:
-
-* ler o estado da rede WiFi
-* ler o endereço IP da placa
-* reiniciar a rede WiFi
-
-Para fazer isso o programa conta com três teclas do tipo push button e o LCD gráfico de 128x64. 
-Durante a operação normal o LCD mostra as variáveis monitorados pela placa e o estado da comunicação. Ao resetar a placa e segurar uma das tecla de programação a placa entre no modo de configuração que permite essas principais operações. 
-Pretende-se melhorar essa interface para incluir mais funcionalidades.
 
 
-## 4.2. ScadaBR 
+## 4.2. Configuração da placa de aquisição de dados
+
+
+
+
 
 Diagrama PID 
 ![](figuras/diagrama_pid.jpg)
@@ -284,6 +262,7 @@ Rede MODBUS
 * MODBUS-RTU
 
 
+
 ## 4.4. Controle do pressão da bomba
 
 ![](figuras/diagrama_blocos_controle_pressao.jpg)
@@ -295,7 +274,9 @@ Santos MECM dos. Controle da pressão de operação da Bancada de Testes para Tu
 Freio de prony.
 
 
-## 5.1. Roteiro da experiência remota
+![](figuras/CurvaPOTxRPM.jpg)
+
+
 
 
 
