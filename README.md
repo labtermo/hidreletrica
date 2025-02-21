@@ -242,9 +242,251 @@ Requisitos:
 
 
 
-## 4.2. Configuração da placa de aquisição de dados
+## 4.2. Programa da placa de aquisição de dados
+
+```
+/*
+  Programa para ler e transmitir os dados do dinamometro da bancada Indalma para o Scada
+  Os valores de torque1, torque2, vazao e rotacao são lidos a uma taxa de amostragem de 10Hz e são mandados
+  para a porta serial com timestamp uma taxa de 115kbps
+  A cada segundo os valores medios são calculados guardados nos Registrador Modbus Ireg
+
+  Baseado na bibioteca de (c)2020 Alexander Emelianov (a.m.emelianov@gmail.com)
+  https://github.com/emelianov/modbus-esp8266
+  
+  modbus Ireg 100 sensor de rotacao em hz pino GPIO25  
+  modbus Ireg 101 sensor de torque1 analogRead ADC1_CH6  GPIO34
+  modbus Ireg 102 sensor de torque2 analogRead ADC1_CH7  GPIO35
+  modbus Ireg 103 sensor de vazao analogRead   
+
+  LCD  clk =  D18 
+  LCD  data=  D23 
+  LCD  CS=    D4 
+  LCD  reset= D17      
+        
+*/
+
+#include <ModbusRTU.h>
+#include <WiFi.h>
+#include <ModbusTCP.h>
+#include <EEPROM.h>
+
+#include "U8g2lib.h"
+
+U8G2_ST7920_128X64_F_SW_SPI u8g2(U8G2_R0, /* clock=*/ 18 /* A4 */ , /* data=*/ 23 /* A2 */, /* CS=*/ 4 /* A3 */, /* reset=*/ 17);
+
+#define EEprom_end_status 0
+#define EEprom_end_nome   25
+#define EEprom_end_senha  50
+#define EEprom_end_ip_fix 75 
+
+//
+//  hardware Entrada de dados 
+//
+#define pino_externo_cont 25    
+#define pino_torque1 35
+#define pino_torque2 34
+#define pino_flow 32
+#define pino_abertura 33 
+#define LedPin 22
+
+hw_timer_t *timer = NULL;
+
+ModbusTCP mb_ip;
+
+IPAddress endereco_ip;
+
+unsigned long cont_millis;
+unsigned long ant_millis=0;
+unsigned long cont_millis_lcd;
+unsigned long ant_millis_lcd=0;
+
+int contador_pulsos;
+
+int s_torque1;
+int s_torque2;
+int s_rotacao;
+int s_flow;
+int s_abertura;
+
+long int t_torque1=0;
+long int t_torque2=0;
+long int t_rotacao=0;
+long int t_flow=0;
+long int t_abertura=0;
+
+int media_torque1;
+int media_torque2;
+int media_rotacao;
+int media_flow;
+int media_abertura;
+
+int contador_amostras=0;
+
+bool cb(Modbus::ResultCode event, uint16_t transactionId, void* data) { // Callback to monitor errors
+  if (event != Modbus::EX_SUCCESS) {
+    Serial.print("Request result: 0x");
+    Serial.print(event, HEX);
+    // erro=1;
+  }
+  return true;
+}
 
 
+void configura_wifi(void)
+{
+}
+
+void inicia_lcd(void)
+{
+  u8g2.begin(); 
+  u8g2.clearBuffer();          // clear the internal memory 
+  u8g2.setFont(u8g_font_unifont);
+  u8g2.drawStr(20, 20, "Dinamometro");
+  u8g2.drawStr(20, 38, "05/02/2025");          
+  u8g2.sendBuffer();    
+}
+
+boolean led_estado=0;
+
+// interrupcoes 
+
+void ARDUINO_ISR_ATTR onTimer() 
+{
+  s_rotacao=contador_pulsos; 
+  contador_pulsos=0;
+}
+
+void IRAM_ATTR int_externo_rotina()
+{
+  contador_pulsos=contador_pulsos+1;
+}
+
+void configura_timer_interrupt(void)
+{
+  timer = timerBegin(1000000);  // configura frequencia de 1000 hz
+  timerAttachInterrupt(timer, &onTimer);
+  timerAlarm(timer, 100000, true, 0);  // chama onTimer cada 100 x 1ms
+}
+
+void setup() 
+{
+  char readChar;
+  String nom_rede,senha,ip_fixo;
+  int Memaddress,x;
+  unsigned char WiFistatus;
+
+  pinMode(pino_externo_cont, INPUT); 
+  pinMode(LedPin, OUTPUT);
+
+  configura_timer_interrupt();
+
+  analogReadResolution(12);
+  attachInterrupt(pino_externo_cont, int_externo_rotina, CHANGE); 
+  delay(500);
+  inicia_lcd(); 
+  
+  Serial.begin(115200);
+  delay(1000);
+  Serial.println(" ");
+  Serial.println("Termofluid_torque_rot_wifi_modbus_IP_config_lcd_2024_11_07");
+
+  Serial.println("WiFi begin");  
+  
+  WiFi.begin(nom_rede,senha);
+
+  long int espera_wifi;  // espera 30 segundos
+  espera_wifi = millis();
+  
+  while ((WiFi.status() != WL_CONNECTED) && (millis() < (espera_wifi+30000))) 
+  {
+    delay(500);
+    Serial.print(".");
+    if (Serial.available() > 0) configura_wifi();
+  } 
+  
+  Serial.println("");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  endereco_ip= WiFi.localIP(); 
+
+  mb_ip.server();
+  mb_ip.addIreg(100);  
+  mb_ip.addIreg(101);
+  mb_ip.addIreg(102);
+  mb_ip.addIreg(103); 
+  mb_ip.addIreg(104);
+}
+
+void Lcd_tela(void) {
+ String s; 
+ u8g2.clearBuffer();
+ u8g2.setCursor(5,15);
+ if (WiFi.status() != WL_CONNECTED) u8g2.print("Sem wifi"); else u8g2.print(endereco_ip);
+ u8g2.drawStr( 1, 30, "RPM");  u8g2.setCursor( 30,30); u8g2.print(media_rotacao); 
+ u8g2.drawStr( 1, 45, "FLW");  u8g2.setCursor( 30,45); u8g2.print(media_flow);   
+ u8g2.drawStr(65, 45, "ABR");  u8g2.setCursor( 95,45); u8g2.print(media_abertura);   
+ u8g2.drawStr( 1, 60, "TQ1");  u8g2.setCursor( 30,60); u8g2.print(media_torque1);   
+ u8g2.drawStr(65, 60, "TQ2");  u8g2.setCursor( 95,60); u8g2.print(media_torque2);   
+ u8g2.sendBuffer();    
+}
+
+void leia_dados(int var_cont)
+{
+ contador_amostras++;
+ s_torque1 =analogRead(pino_torque1); 
+ s_torque2 =analogRead(pino_torque2); 
+ s_flow    =analogRead(pino_flow); // Serial.print(var_cont);Serial.print("; "); 
+ s_abertura=analogRead(pino_abertura);
+ Serial.print(s_rotacao); Serial.print(" ; "); Serial.print(s_flow); Serial.print(" ; "); 
+ Serial.print(media_torque1); Serial.print(" ; "); Serial.print(media_torque2);Serial.print(" ; "); Serial.println(s_abertura);
+ //Serial.print(" ; "); Serial.println(0);
+ t_rotacao =t_rotacao  + s_rotacao;
+ t_torque1 =t_torque1  + s_torque1;
+ t_torque2 =t_torque2  + s_torque2;
+ t_flow    =t_flow     + s_flow;
+ t_abertura=t_abertura + s_abertura;
+ if (contador_amostras>=10) 
+ { 
+  contador_amostras=0;
+  media_rotacao =t_rotacao/10;
+  media_torque1 =t_torque1/10;
+  media_torque2 =t_torque2/10;
+  media_flow    =t_flow/10;
+  media_abertura=t_abertura/10;
+  t_rotacao=0;
+  t_torque1=0;
+  t_torque2=0;
+  t_flow=0;
+  t_abertura=0;
+ }
+}
+
+
+void loop() {
+
+  if (Serial.available() > 0) { configura_wifi(); }
+  mb_ip.task();  
+  cont_millis = millis();
+  if (cont_millis > ant_millis)
+  {
+   ant_millis=cont_millis+99; // 100; //era 1000 
+   leia_dados(cont_millis);
+  }
+  cont_millis_lcd = millis();
+  if (cont_millis_lcd > ant_millis_lcd)
+  {
+   ant_millis_lcd=cont_millis_lcd+1000; 
+   Lcd_tela();  
+   mb_ip.Ireg(100, media_rotacao); 
+   mb_ip.Ireg(101, media_torque1);
+   mb_ip.Ireg(102, media_torque2);
+   mb_ip.Ireg(103, media_flow); 
+   mb_ip.Ireg(104, media_abertura);  
+  }
+}
+```
 
 
 
