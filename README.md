@@ -122,7 +122,7 @@ O sensor de proximidade é do tipo NPN coletor aberto com os seguintes pinos mos
 ![](fotos/pinagem_proximidade.jpg)
 
 | fio | descrição |  Borne cor da emenda|           
-|:----:|:--------:|:---------:|:------:|
+|:----|:--------:|:---------:|
 | BN - Brown | Alimentação 6-30Vdc | Vermelho| 
 | BK - Black | sinal célula | Preto |
 | BU - Blue  | GND | Amarelo |
@@ -193,37 +193,21 @@ As placas para aquirir as variáveis hidraulicas e mecânicas serão apresentado
 
 ## 4.1. Placa de aquisição de dados com ESP32
 
-O desenvolvimento da placa de aquisição - terceira versão. A primeira versão foi do CW552 da Controlware. O segunda versão foi desenvolvido trabalho de TCC Rodrigo Calixto baseado no Arduino.
-Terceira versão desenvolvido em ESP32.
+A placa de aquisição de sinal está na sua terceira versão. A primeira versão foi baseado no Kit de desenvolvimento CW552 da Controlware Automação Ltda e foi usado para fazer as primeiros ensaios. 
+A segunda versão da placa de acquisição foi desenvolvido durante o trabalho de conclusão de curso do estudante de engenharia eletrônica Rodrigo Calixto e usou o microcontrolador Arduino.
+A terceira versão foi desenvolvido para dar apoio ao trabalho de conclusão de curso do estudante Marjan Jodiwongso e usou como microcontrolador o ESP32.
 
-Requisitos:
+Os requisitos mínimos dessa placa foram:
 
-* Concentrar todas os sensores e transdutores
-* Ligação com computador wireless 
+* Concentrar todas os sensores e transdutores da bancada
+* Ligação wireless com computador 
 * Protocolo Modbus-IP a uma taxa de amostragem de 1Hz
 * Capacidade de medir dados a 10Hz de amostragem e encaminhar a porta serial dedicado a 115kBPS
 * display LCD mostrando todos os dados
 * configuração de IP dinâmico e estático 
 * Alimentação 5, 12 e 24Volts DC
 
-
-![](figuras/esquema_esp32wifi.jpg)
-
-| conector | descrição |  sinal|           
-|:----:|:--------:|:---------:|
-| Jx | Sensor rotação da turbina  | pulsos em 12V  |  
-| Jx | Amplificador célula carga 1 | 0-10V  |
-| Jx | Amplificador célula carga 2 | 0-10V  |
-| Jx | abertura de borboleta | 0-3.3V
-| Jx | vazão | 4-20mA |
-
-
-
-
-![](figuras/Dinamometro_ESP32_wifi_modbus_freio_turbina_2025.jpg)
-
-
-
+As entradas e saídas de dados que a placa deveria tratar são dados na tabela a seguir:
 
 | item | descrição | Interface | Função | pino pcb placa |           
 |:----:|:--------:|:---------:|:------:|:----:|
@@ -238,6 +222,22 @@ Requisitos:
 | 9 | Interface serial digital    | TTL      | conversor ADC |
 
 
+A implementação e dado no diagrama esquemático a seguir:
+
+![](figuras/esquema_esp32wifi.jpg)
+
+Os conectores para interligar a placa com os sensores são dados na seguinte tabela:
+
+| conector | descrição |  sinal|           
+|:----:|:--------:|:---------:|
+| J2 | Sensor rotação da turbina  | pulsos em 12V  |  
+| J3 | Amplificador célula carga 1 | 0-10V  |
+| J4 | Amplificador célula carga 2 | 0-10V  |
+| J6 | abertura de borboleta | 0-3.3V
+| J7 | vazão por meio de módulo 4-20mA para tensão  | 4-20mA |
+
+
+![](figuras/Dinamometro_ESP32_wifi_modbus_freio_turbina_2025.jpg)
 
 
 
@@ -279,7 +279,6 @@ U8G2_ST7920_128X64_F_SW_SPI u8g2(U8G2_R0, /* clock=*/ 18 /* A4 */ , /* data=*/ 2
 #define EEprom_end_nome   25
 #define EEprom_end_senha  50
 #define EEprom_end_ip_fix 75 
-
 //
 //  hardware Entrada de dados 
 //
